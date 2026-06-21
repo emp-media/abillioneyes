@@ -10,6 +10,7 @@
   --teal: #2fa39d;
   --teal-dark: #164c4d;
   --gold: #a86f33;
+  --die-beige: #d1b083;
   --smoke: #171314;
   --line: rgba(255, 255, 255, 0.22);
   --headline-font: "Rye", Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
@@ -125,7 +126,6 @@ a {
   position: relative;
   min-height: 100svh;
   overflow: hidden;
-  border-bottom: 1px solid var(--line);
 }
 
 .hero-bg {
@@ -267,13 +267,46 @@ h3 {
 }
 
 .marquee {
+  position: relative;
   overflow: hidden;
-  border-block: 1px solid var(--line);
-  background: #090607;
+  background: rgba(9, 6, 7, 0.76);
   color: var(--teal);
   font-family: var(--headline-font);
   font-weight: 900;
   font-size: clamp(1.6rem, 5vw, 4rem);
+}
+
+.site-wallpaper {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(180deg, rgba(4, 3, 3, 0.34), rgba(4, 3, 3, 0.1) 18rem, rgba(4, 3, 3, 0.28)),
+    url("assets/wallpaper-texture-v3.png") center top / 100% auto repeat-y,
+    #060505;
+}
+
+.site-wallpaper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(181, 40, 121, 0.14), transparent 26rem),
+    radial-gradient(circle at 82% 32%, rgba(47, 163, 157, 0.12), transparent 28rem),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.34), transparent 18%, transparent 82%, rgba(0, 0, 0, 0.36));
+}
+
+.site-wallpaper::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  height: clamp(12rem, 24vw, 22rem);
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, #050303 86%);
 }
 
 .marquee div {
@@ -301,14 +334,12 @@ h3 {
 }
 
 .ornamented {
-  background:
-    linear-gradient(90deg, transparent, rgba(47, 163, 157, 0.35), rgba(181, 40, 121, 0.28), transparent) top / 100% 1px no-repeat,
-    linear-gradient(90deg, transparent, rgba(181, 40, 121, 0.22), rgba(47, 163, 157, 0.28), transparent) bottom / 100% 1px no-repeat;
+  background: none;
 }
 
 .merch-section {
-  background:
-    linear-gradient(90deg, transparent, rgba(47, 163, 157, 0.35), rgba(181, 40, 121, 0.28), transparent) top / 100% 1px no-repeat;
+  padding-bottom: clamp(7rem, 14vw, 12rem);
+  background: none;
 }
 
 .section-heading {
@@ -374,6 +405,14 @@ h3 {
   background: var(--magenta);
 }
 
+.track-card.is-playing .play-toggle::before {
+  width: 0.68rem;
+  height: 0.9rem;
+  border: 0;
+  border-inline: 0.18rem solid var(--paper);
+  transform: none;
+}
+
 .video-grid,
 .merch-grid {
   display: grid;
@@ -428,7 +467,8 @@ h3 {
 }
 
 .album-copy p:not(.eyebrow),
-.band-layout p {
+.band-copy p,
+.band-concept > p {
   margin: 1.2rem 0 0;
   color: rgba(255, 255, 255, 0.9);
   font-size: clamp(1.05rem, 2vw, 1.28rem);
@@ -461,11 +501,52 @@ h3 {
   margin: 0.35rem 0 0;
 }
 
-.band-layout {
+.band-section {
+  width: 100%;
+  padding-inline: max(1rem, calc((100% - 1180px) / 2));
+  background: rgba(5, 3, 3, 0.96);
+}
+
+.band-concept {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 50%) minmax(18rem, 1fr);
-  gap: clamp(2rem, 5vw, 4rem);
+  gap: clamp(1.5rem, 4vw, 3rem);
   align-items: center;
+  background: none;
+}
+
+.band-concept h3 {
+  color: var(--paper);
+  font-size: clamp(1.55rem, 3vw, 2.75rem);
+}
+
+.press-kit {
+  grid-template-columns: minmax(0, 50%) minmax(18rem, 1fr);
+}
+
+.member-list {
+  display: grid;
+  gap: 0.7rem;
+  margin: 1.8rem 0 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.member-list div {
+  padding: 0.95rem;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.member-list dt {
+  color: var(--teal);
+  font-family: Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.member-list dd {
+  margin: 0.35rem 0 0;
+  color: #fff;
 }
 
 .band-logo-die {
@@ -552,7 +633,7 @@ h3 {
 
   .hero-inner,
   .section-heading,
-  .band-layout {
+  .press-kit {
     grid-template-columns: 1fr;
   }
 
@@ -576,6 +657,10 @@ h3 {
 
   .band-logo-die {
     justify-self: start;
+  }
+
+  .member-list {
+    grid-template-columns: 1fr;
   }
 
   .eyes-system {
