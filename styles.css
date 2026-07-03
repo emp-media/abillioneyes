@@ -532,8 +532,32 @@ h3 {
 }
 
 .member-list div {
+  overflow: hidden;
   padding: 0.95rem;
   background: rgba(255, 255, 255, 0.045);
+}
+
+.member-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.18;
+  margin-bottom: 0.9rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(1.12) contrast(1.06) saturate(1.08);
+}
+
+.member-photo-ralf {
+  background-image: url("assets/members/ralf1.png");
+}
+
+.member-photo-tobias {
+  background-image: url("assets/members/emp1.png");
+}
+
+.member-photo-oliver {
+  background-image: url("assets/members/ollo1.png");
 }
 
 .member-list dt {
